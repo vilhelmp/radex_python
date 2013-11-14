@@ -3,7 +3,7 @@
 
 
 
-class Radex:
+class Radex(object):
     """
     Input (* = mandatory input)
     *f      : Frequency - frequency of line (in GHz)
