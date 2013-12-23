@@ -1,7 +1,7 @@
 
-
-
-
+# TODO : improve usability and grid running capabilities...
+# TODO : be able to run RADEX on a data cube, to get density/temperature
+#        of each pixel assuming LTE in each pixel.
 
 class Radex(object):
     """
