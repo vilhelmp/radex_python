@@ -64,8 +64,8 @@ class Radex(object):
                 if stdval != None:
                     exec('self.{0} = {1}'.format(par, stdval))
                     if not self.silent:
-                        print('Using default value '
-                        'of {0} for {1}'.format(stdval, par))
+                        print(('Using default value '
+                        'of {0} for {1}'.format(stdval, par)))
                 else:
                     raise Exception(par)
     def __str__(self):
@@ -103,8 +103,8 @@ class Radex(object):
         with open('radex.out', 'r') as f:
             lines = f.readlines()
         if (lines[-2].split()[-1] != '(erg/cm2/s)'):
-            print "Error: Ambiguous line selection. Reduce bandwidth?"
-            print "See radex.out for details"
+            print("Error: Ambiguous line selection. Reduce bandwidth?")
+            print("See radex.out for details")
             sys.exit()
         return float(lines[-1].split()[-2])
     def _find_cdens(self):
@@ -121,12 +121,12 @@ class Radex(object):
                         "See radex.out for details")
                 if self.debug:
                     raise Exception(msg)
-            if self.debug: print "mflx= ",mflux
+            if self.debug: print("mflx= ",mflux)
             ratio = self.oflux/[mflux,self.oflux][mflux==0]
             self.cdinit *= ratio
-            if self.debug: print ratio
+            if self.debug: print(ratio)
             if (iteration > self.maxiter):
-                if not self.silent: print "Maximum number of iterations exceeded"
+                if not self.silent: print("Maximum number of iterations exceeded")
                 ratio = 1
         self.mflux = mflux
         return self.cdinit
@@ -137,25 +137,25 @@ class Radex(object):
         if self.tovary == 'tkin':
             tkin_inp = self.tkin
             self.cdens = []
-            if not self.silent: print 'Running model and varying kinetic temperature.'
+            if not self.silent: print('Running model and varying kinetic temperature.')
             for i in tkin_inp:
                 self.tkin = i
                 density = self._find_cdens()
                 self.cdens.append(density)
-                if self.debug: print 'density : ',density
+                if self.debug: print('density : ',density)
             self.tkin = array(tkin_inp)
         elif self.tovary == 'h2dens':
             h2dens_inp = self.h2dens
             self.cdens = []
-            if not self.silent: print 'Running model and varying H2 density.'
+            if not self.silent: print('Running model and varying H2 density.')
             for i in h2dens_inp:
                 self.h2dens = i
                 density = self._find_cdens()
-                if self.debug: print 'density : ',density
+                if self.debug: print('density : ',density)
                 self.cdens.append(density)
             self.h2dens = array(h2dens_inp)
         self.cdens = array(self.cdens)
-        if not self.silent: print 'Done!'
+        if not self.silent: print('Done!')
 
 
 
